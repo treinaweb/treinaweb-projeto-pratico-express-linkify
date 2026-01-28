@@ -11,12 +11,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/adapter-mariadb": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "dotenv": "^17.2.3",
     "epxress": "^0.0.1-security",
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^25.0.9",
+    "@types/node": "^25.0.10",
+    "prisma": "^7.3.0",
     "typescript": "^5.9.3"
   }
 }
