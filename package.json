@@ -13,6 +13,7 @@
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.3.0",
     "@prisma/client": "^7.3.0",
+    "better-auth": "^1.4.17",
     "dotenv": "^17.2.3",
     "epxress": "^0.0.1-security",
     "express": "^5.2.1"
