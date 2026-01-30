@@ -5,6 +5,8 @@ const router = Router();
 const authController = new AuthController()
 
 router.post('/api/auth/register', (req: Request, res: Response) => { authController.register(req, res)});
+router.post('/api/auth/login', (req: Request, res: Response) => { authController.login(req, res)});
+
 
 router.get('/', (req: Request, res: Response) => {
 	res.json({ message: "Hello World"});
