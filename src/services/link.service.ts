@@ -18,6 +18,8 @@ export class LinkService {
         userId,
       },
     });
+
+    return link;
   }
 
   async getUserLinks(userId: string) {
