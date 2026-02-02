@@ -7,7 +7,7 @@ export class LinkController {
   async create(req: Request, res: Response) {
     try {
       const { originalUrl } = req.body;
-      const userId = (req as any).user.id;
+      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
 
       const link = await linkService.createLink(userId, originalUrl);
 
@@ -27,11 +27,11 @@ export class LinkController {
 
   async getLinks(req: Request, res: Response) {
     try {
-      const userId = (req as any).user.id;
+      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
 
       const links = await linkService.getUserLinks(userId);
 
-      return res.status(201).json(
+      return res.status(200).json(
         links.map((link) => ({
           id: link.id,
           originalUrl: link.originalUrl,
@@ -50,7 +50,7 @@ export class LinkController {
   async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const userId = (req as any).user.id;
+      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
 
       await linkService.deleteLink(id as string, userId);
 

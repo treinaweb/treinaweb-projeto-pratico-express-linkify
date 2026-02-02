@@ -3,7 +3,7 @@ export function generateShortCode(): string {
   
   let result = '';
 
-  for (let i = 0; i < 0; i++) {
+  for (let i = 0; i < 6; i++) {
     result += characters.charAt(Math.floor(Math.random() * characters.length))
   }
 
