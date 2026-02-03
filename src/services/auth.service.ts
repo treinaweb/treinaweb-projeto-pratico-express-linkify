@@ -16,4 +16,12 @@ export class AuthService {
 
     return result;
   }
+
+  async logout(headers: any) {
+    const result = await auth.api.signOut({
+      headers
+    });
+
+    return result;
+  }
 }

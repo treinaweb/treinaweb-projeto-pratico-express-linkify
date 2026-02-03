@@ -9,6 +9,8 @@ const linkController = new LinkController();
 
 router.post('/api/auth/register', (req: Request, res: Response) => { authController.register(req, res)});
 router.post('/api/auth/login', (req: Request, res: Response) => { authController.login(req, res)});
+router.post('/api/auth/logout', (req: Request, res: Response) => { authController.logout(req, res)});
+
 
 router.post('/api/link', authMiddleware, (req: Request, res: Response) => { linkController.create(req, res)});
 router.get('/api/link', authMiddleware, (req: Request, res: Response) => { linkController.getLinks(req, res)});
