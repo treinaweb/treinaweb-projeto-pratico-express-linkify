@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { LinkService } from "../services/link.service";
+import { linkSchema } from "../schemas/link.sckema";
+import z, { ZodError } from "zod";
 
 const linkService = new LinkService();
 
 export class LinkController {
   async create(req: Request, res: Response) {
     try {
-      const { originalUrl } = req.body;
-      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
+      const { originalUrl } = linkSchema.parse(req.body);
+      const userId = (req as any).user.id;
 
       const link = await linkService.createLink(userId, originalUrl);
 
@@ -20,14 +22,17 @@ export class LinkController {
         createdAt: link.createdAt,
       });
     } catch (error) {
-      console.log(error);
-      return res.status(500).json(error);
+      if (error instanceof ZodError) {
+        const zodError = z.treeifyError(error);
+        return res.status(400).json({ error: zodError });
+      }
+      return res.status(500).json({ error });
     }
   }
 
   async getLinks(req: Request, res: Response) {
     try {
-      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
+      const userId = (req as any).user.id;
 
       const links = await linkService.getUserLinks(userId);
 
@@ -50,7 +55,7 @@ export class LinkController {
   async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const userId = 'mxQqBBjBpmM3gnnVUs0w0fV8laJ3dCYv'; //(req as any).user.id;
+      const userId = (req as any).user.id;
 
       await linkService.deleteLink(id as string, userId);
 
@@ -62,11 +67,11 @@ export class LinkController {
   }
 
   async redirect(req: Request, res: Response) {
-     try {
+    try {
       const { shortCode } = req.params;
       const originalUrl = await linkService.redirectLink(shortCode as string);
 
-      return res.redirect(originalUrl)
+      return res.redirect(originalUrl);
     } catch (error) {
       console.log(error);
       return res.status(500).json(error);
